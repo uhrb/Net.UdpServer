@@ -1,4 +1,4 @@
-# Net.Torrent
+# Net.UdpServer
 [![Build Status](https://travis-ci.com/l0nley/Net.UdpServer.svg?branch=master)](https://travis-ci.com/l0nley/Net.UdpServer)
 Net.UdpServer is simple Udp server, wich allows implement message processing pipeline for custom UDP-based protocol. 
 General architecture is similar to asp.net core middlewares.
