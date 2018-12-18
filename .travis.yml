@@ -5,4 +5,4 @@ script:
  - dotnet restore
  - dotnet build -c=Release
  - dotnet pack -c=Release
- - dotnet nuget push ./Net.Torrent/bin/Release/Net.UdpServer.1.0.0.nupkg -s=https://www.nuget.org -k=$NUGET_KEY
+ - dotnet nuget push ./Net.UdpServer/bin/Release/Net.UdpServer.1.0.0.nupkg -s=https://www.nuget.org -k=$NUGET_KEY
