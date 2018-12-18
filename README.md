@@ -16,12 +16,12 @@ services.AddLogging(); // for example using Microsoft.Extensions.Logging.Console
 services.AddOptions<ServerConfiguration>(config => {
 	config.EndPoint = new IPEndPoint(IPAddress.Parse("192.168.1.1"), 1337);
 });
+services.AddDefaultRequestContextFactory();
 services.AddSingleton<IServer,Server>();
 var provider = services.BuildServiceProvider();
 var pipeline = new PipelineBuilder(provider)
 	.Use(async (context, next) => {
 		context.ResponsePacket = context.RequestPacket;
-		await next();
 	})
 	.Build();
 var server = provider.GetRequiredService<IServer>();

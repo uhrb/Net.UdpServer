@@ -9,6 +9,7 @@
     <RepositoryUrl>https://github.com/l0nley/Net.UdpServer.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>udp server</PackageTags>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
