@@ -27,7 +27,7 @@ namespace Net.UdpServer
         /// <summary>
         /// Gets or sets value, indicating address usage is exclusive. Default is true.
         /// </summary>
-        public bool ExclusiveAddressUse { get; set; }
+        public bool? ExclusiveAddressUse { get; set; }
 
         /// <summary>
         /// Gets or sets value, indicating multicast messages returned to application itself. Default is false.
@@ -46,7 +46,6 @@ namespace Net.UdpServer
         {
             DontFragment = true;
             EnableBroadcast = false;
-            ExclusiveAddressUse = true;
             MulticastLoopback = false;
             Ttl = 255;
         }

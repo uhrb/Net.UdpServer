@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
-using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
@@ -40,7 +39,7 @@ namespace Net.UdpServer
                 throw new InvalidOperationException("Configuration not provided");
             }
             _logger.LogInformation($"Starting udp server on {_config.Value.EndPoint}");
-            var sender = new IPEndPoint(IPAddress.Any, 0);
+            //var sender = new IPEndPoint(IPAddress.Any, 0);
             using (var client = new UdpClient(_config.Value.EndPoint))
             {
                 if (_config.Value.AllowNatTraversal != null)
@@ -50,7 +49,10 @@ namespace Net.UdpServer
 
                 client.DontFragment = _config.Value.DontFragment;
                 client.EnableBroadcast = _config.Value.EnableBroadcast;
-                client.ExclusiveAddressUse = _config.Value.ExclusiveAddressUse;
+                if (_config.Value.ExclusiveAddressUse != null)
+                {
+                    client.ExclusiveAddressUse = _config.Value.ExclusiveAddressUse.GetValueOrDefault();
+                }
                 client.MulticastLoopback = _config.Value.MulticastLoopback;
                 client.Ttl = _config.Value.Ttl;
                 while (token.IsCancellationRequested == false)
