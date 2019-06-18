@@ -1,4 +1,5 @@
 ﻿using System.Threading;
+using System.Threading.Tasks;
 
 namespace Net.UdpServer
 {
@@ -12,6 +13,6 @@ namespace Net.UdpServer
         /// </summary>
         /// <param name="pipeline">Pipeline</param>
         /// <param name="token">Cancellation token</param>
-        void Run(RequestDelegate pipeline, CancellationToken token);
+        Task Run(RequestDelegate pipeline, CancellationToken token);
     }
 }

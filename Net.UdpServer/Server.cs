@@ -32,14 +32,13 @@ namespace Net.UdpServer
         }
 
         /// <inheritdoc/>
-        public void Run(RequestDelegate pipeline, CancellationToken token)
+        public async Task Run(RequestDelegate pipeline, CancellationToken token)
         {
             if (_config.Value == null)
             {
                 throw new InvalidOperationException("Configuration not provided");
             }
             _logger.LogInformation($"Starting udp server on {_config.Value.EndPoint}");
-            //var sender = new IPEndPoint(IPAddress.Any, 0);
             using (var client = new UdpClient(_config.Value.EndPoint))
             {
                 if (_config.Value.AllowNatTraversal != null)
@@ -55,15 +54,25 @@ namespace Net.UdpServer
                 }
                 client.MulticastLoopback = _config.Value.MulticastLoopback;
                 client.Ttl = _config.Value.Ttl;
+                if(_config.Value.MulticastGroups != null)
+                {
+                    foreach(var addr in _config.Value.MulticastGroups)
+                    {
+                        client.JoinMulticastGroup(addr);
+                    }
+                }
                 while (token.IsCancellationRequested == false)
                 {
-                    var received = client.ReceiveAsync().GetAwaiter().GetResult();
+                    var receiveTask = client.ReceiveAsync();
+                    receiveTask.Wait(token);
+                    var received = await receiveTask;
                     _logger.LogDebug($"Received {received.Buffer.Length} bytes from {received.RemoteEndPoint}");
                     if (received.Buffer != null)
                     {
                         var id = Convert.ToBase64String(BitConverter.GetBytes(Interlocked.Increment(ref contextId)));
                         _logger.LogDebug($"{id} Context started");
                         var context = _factory.Create(received.RemoteEndPoint, received.Buffer, id);
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                         Task.Run(async () =>
                         {
                             try
@@ -80,7 +89,8 @@ namespace Net.UdpServer
                             {
                                 _logger.LogError(exception: e, message: $"{id} Unhandled exception during pipeline execution");
                             }
-                        });
+                        }).ConfigureAwait(false);
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                     }
                 }
             }

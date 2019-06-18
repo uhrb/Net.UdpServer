@@ -1,8 +1,8 @@
 language: csharp
 mono: none
-dotnet: 2.1
+dotnet: 2.2
 script:
  - dotnet restore
  - dotnet build -c=Release
  - dotnet pack -c=Release
- - dotnet nuget push ./Net.UdpServer/bin/Release/Net.UdpServer.1.0.2.nupkg -s=https://www.nuget.org -k=$NUGET_KEY
+ - dotnet nuget push ./Net.UdpServer/bin/Release/Net.UdpServer.2.0.2.nupkg -s=https://www.nuget.org -k=$NUGET_KEY

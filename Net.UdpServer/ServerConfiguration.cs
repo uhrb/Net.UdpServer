@@ -35,6 +35,11 @@ namespace Net.UdpServer
         public bool MulticastLoopback { get; set; }
 
         /// <summary>
+        /// Gets or sets multicast addresses to join
+        /// </summary>
+        public IPAddress[] MulticastGroups { get; set; }
+
+        /// <summary>
         /// Gets or sets TTL. Default is 255.
         /// </summary>
         public short Ttl { get; set; }

@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <Authors>Uladzimir Harabtsou &lt;hofvl0nley@gmail.com&gt;</Authors>
     <Copyright>Uladzimir Harabtsou &lt;hofvl0nley@gmail.com&gt;</Copyright>
     <PackageLicenseUrl>https://raw.githubusercontent.com/l0nley/Net.UdpServer/master/LICENSE.md</PackageLicenseUrl>
@@ -9,7 +9,7 @@
     <RepositoryUrl>https://github.com/l0nley/Net.UdpServer.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>udp server</PackageTags>
-    <Version>1.0.2</Version>
+    <Version>2.0.2</Version>
   </PropertyGroup>
 
   <ItemGroup>
