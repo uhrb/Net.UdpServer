@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <Authors>Uladzimir Harabtsou &lt;hofvl0nley@gmail.com&gt;</Authors>
     <Copyright>Uladzimir Harabtsou &lt;hofvl0nley@gmail.com&gt;</Copyright>
     <PackageLicenseUrl>https://raw.githubusercontent.com/l0nley/Net.UdpServer/master/LICENSE.md</PackageLicenseUrl>
